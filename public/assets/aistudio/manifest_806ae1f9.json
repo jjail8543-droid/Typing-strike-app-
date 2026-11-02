@@ -1,15 +1,31 @@
 {
-  "id": "/",
   "name": "TypeStrike - Typing Shooter Arcade",
   "short_name": "TypeStrike",
-  "description": "Fast-paced arcade typing shooter designed to boost your typing speed, accuracy, and reflexes through exciting space combat.",
-  "dir": "ltr",
-  "display": "standalone",
-  "orientation": "any",
-  "scope": "/",
   "start_url": "/",
+  "scope": "/",
+  "id": "/",
+  "description": "Fast-paced arcade typing shooter designed to boost your typing speed, accuracy, and reflexes through exciting space combat.",
+  "lang": "en",
+  "dir": "ltr",
+  "orientation": "any",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui",
+    "browser"
+  ],
   "theme_color": "#020617",
   "background_color": "#020617",
+  "categories": [
+    "games",
+    "arcade",
+    "education",
+    "productivity"
+  ],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ec4e53b7",
+  "prefer_related_applications": false,
+  "related_applications": [],
   "icons": [
     {
       "src": "/icon.svg",
@@ -34,6 +50,130 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "TypeStrike Combat Arena - Desktop View"
+    },
+    {
+      "src": "/screenshot-narrow.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "TypeStrike Mobile Interceptor"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Endless Survival",
+      "short_name": "Survival",
+      "description": "Engage in non-stop interceptor combat",
+      "url": "/?mode=survival",
+      "icons": [
+        {
+          "src": "/shortcut-survival.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Wave Blitz Campaign",
+      "short_name": "Wave Blitz",
+      "description": "Battle through 10 escalating defense waves",
+      "url": "/?mode=waves",
+      "icons": [
+        {
+          "src": "/shortcut-waves.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "2-Minute Sprint",
+      "short_name": "Sprint",
+      "description": "High-intensity 120-second speed benchmark",
+      "url": "/?mode=time_attack",
+      "icons": [
+        {
+          "src": "/shortcut-sprint.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+typestrike",
+      "url": "/?mode=%s"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/?action=load-words",
+      "name": "TypeStrike Custom Word List",
+      "icons": [
+        {
+          "src": "/icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ],
+      "accept": {
+        "text/plain": [".txt"],
+        "application/json": [".json"]
+      }
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "widgets": [
+    {
+      "name": "TypeStrike Daily Target",
+      "short_name": "Daily Target",
+      "description": "Quick daily speed workout widget",
+      "tag": "typestrike-daily",
+      "template": "widget-daily",
+      "ms_ac_template": "/widgets/daily.json",
+      "data": "/widgets/daily-data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "/screenshot-wide.png",
+          "sizes": "1280x720",
+          "type": "image/png",
+          "label": "Widget Preview"
+        }
+      ]
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 440
+  },
+  "note_taking": {
+    "new_note_url": "/?action=practice-notes"
+  },
+  "scope_extensions": [
+    {
+      "origin": "https://ais-dev-t33h2hlw6m77sz3pstqwig-872637317821.asia-southeast1.run.app"
     }
   ]
 }

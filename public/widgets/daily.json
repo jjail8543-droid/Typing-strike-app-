@@ -1,0 +1,24 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "TypeStrike Daily Challenge",
+      "weight": "Bolder",
+      "size": "Medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Launch your daily 2-minute typing sprint",
+      "isSubtle": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Start Mission",
+      "url": "https://ais-dev-t33h2hlw6m77sz3pstqwig-872637317821.asia-southeast1.run.app/?mode=time_attack"
+    }
+  ]
+}
