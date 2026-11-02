@@ -1,0 +1,6 @@
+{
+  "name": "TypeStrike - Typing Shooter Arcade",
+  "description": "Fast-paced arcade typing shooter designed to boost your typing speed, accuracy, and reflexes through exciting space combat.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
