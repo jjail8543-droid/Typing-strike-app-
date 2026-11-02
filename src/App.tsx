@@ -9,7 +9,8 @@ import { GameHUD } from './components/GameHUD';
 import { TitleScreen } from './components/TitleScreen';
 import { PauseModal } from './components/PauseModal';
 import { GameOverModal } from './components/GameOverModal';
-import { KeyboardGuide } from './components/KeyboardGuide';
+import { VirtualKeyboard } from './components/VirtualKeyboard';
+import { OfflineIndicator } from './components/OfflineIndicator';
 import { Enemy, GameSettings, GameStats, GameStatus } from './game/types';
 import { Difficulty, GameMode } from './game/words';
 import { sound } from './game/audio';
@@ -44,6 +45,7 @@ export default function App() {
   // Live Game State synced from Engine
   const [status, setStatus] = useState<GameStatus>('TITLE');
   const [lockedEnemy, setLockedEnemy] = useState<Enemy | null>(null);
+  const [activeEnemies, setActiveEnemies] = useState<Enemy[]>([]);
   const [stats, setStats] = useState<GameStats>({
     score: 0,
     wpm: 0,
@@ -99,10 +101,11 @@ export default function App() {
     const engine = new GameEngine(canvasRef.current, initialSettings);
     engineRef.current = engine;
 
-    engine.setOnStatsUpdate((newStats, newStatus, currentLockedEnemy) => {
+    engine.setOnStatsUpdate((newStats, newStatus, currentLockedEnemy, currentEnemies) => {
       setStats(newStats);
       setStatus(newStatus);
       setLockedEnemy(currentLockedEnemy);
+      setActiveEnemies(currentEnemies || []);
 
       // Check high scores & save lifetime stats on round finish
       if (newStatus === 'GAMEOVER' || newStatus === 'VICTORY') {
@@ -242,8 +245,19 @@ export default function App() {
     setLockedEnemy(null);
   };
 
-  // Determine next expected character for typing guide
-  const nextTargetChar = lockedEnemy ? lockedEnemy.word.charAt(lockedEnemy.typedIndex) : null;
+  const handleVirtualKeyPress = (char: string) => {
+    if (status === 'TITLE') {
+      if (char === ' ' || char === 'Enter') {
+        handleStartGame();
+      }
+    } else if (status === 'GAMEOVER' || status === 'VICTORY') {
+      if (char === ' ' || char === 'Enter') {
+        handleStartGame();
+      }
+    } else if (status === 'PLAYING') {
+      engineRef.current?.handleKeyPress(char);
+    }
+  };
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-slate-950 select-none">
@@ -312,22 +326,17 @@ export default function App() {
         />
       )}
 
-      {/* Optional Touch-Typing Visual Guide */}
-      {status === 'PLAYING' && showKeyboardGuide && (
-        <KeyboardGuide nextChar={nextTargetChar} />
-      )}
-
-      {/* Touch-typing guide toggle affordance (bottom right, ultra-quiet) */}
+      {/* Interactive Virtual On-Screen Keyboard */}
       {status === 'PLAYING' && (
-        <div className="absolute bottom-3 right-4 z-20 pointer-events-auto">
-          <button
-            onClick={() => setShowKeyboardGuide(!showKeyboardGuide)}
-            className="text-[10px] font-mono uppercase tracking-wider text-slate-500 hover:text-slate-300 px-2 py-1 rounded bg-slate-900/60 border border-slate-800/80 transition-colors cursor-pointer"
-          >
-            {showKeyboardGuide ? 'Hide Guide' : 'Keyboard Guide'}
-          </button>
-        </div>
+        <VirtualKeyboard
+          onKeyPress={handleVirtualKeyPress}
+          lockedEnemy={lockedEnemy}
+          activeEnemies={activeEnemies}
+          isGameActive={status === 'PLAYING'}
+        />
       )}
+      {/* Connectivity & Offline indicator */}
+      <OfflineIndicator />
     </div>
   );
 }

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="96" fill="#020617"/>
+  <!-- Glowing Hexagon Shield -->
+  <polygon points="256,40 460,158 460,354 256,472 52,354 52,158" stroke="#38bdf8" stroke-width="14" fill="#0f172a" />
+  <!-- Crosshairs -->
+  <line x1="256" y1="100" x2="256" y2="412" stroke="#38bdf8" stroke-width="6" stroke-dasharray="16 12" stroke-opacity="0.5" />
+  <line x1="100" y1="256" x2="412" y2="256" stroke="#38bdf8" stroke-width="6" stroke-dasharray="16 12" stroke-opacity="0.5" />
+  <!-- Turret Cannon Base -->
+  <circle cx="256" cy="280" r="54" fill="#0284c7" stroke="#38bdf8" stroke-width="10" />
+  <circle cx="256" cy="280" r="20" fill="#ffffff" />
+  <!-- Turret Barrel firing upwards -->
+  <polygon points="256,120 226,270 286,270" fill="#f59e0b" />
+  <rect x="240" y="100" width="32" height="40" rx="6" fill="#fbbf24" />
+  <!-- Laser Blast Sparks -->
+  <circle cx="256" cy="90" r="16" fill="#38bdf8" />
+  <circle cx="256" cy="90" r="8" fill="#ffffff" />
+</svg>

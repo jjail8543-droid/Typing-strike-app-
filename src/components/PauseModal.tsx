@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Play, RotateCcw, Home, Volume2, VolumeX, Sparkles } from 'lucide-react';
 import { Difficulty } from '../game/words';
 import { sound } from '../game/audio';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface PauseModalProps {
   onResume: () => void;
@@ -163,6 +164,10 @@ export const PauseModal: React.FC<PauseModalProps> = ({
             <RotateCcw className="w-4 h-4" />
             <span>RESTART ROUND</span>
           </button>
+
+          <div className="flex justify-center py-1">
+            <PWAInstallButton className="w-full justify-center" />
+          </div>
 
           <button
             onClick={onHome}

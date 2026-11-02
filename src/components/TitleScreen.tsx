@@ -3,6 +3,7 @@ import { Play, Volume2, VolumeX, Zap, Trophy, Shield, Award, ChevronRight } from
 import { Difficulty, GameMode } from '../game/words';
 import { LifetimeStats, RankTier, getNextRankProgress } from '../game/ranking';
 import { RankBadge } from './RankBadge';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface TitleScreenProps {
   difficulty: Difficulty;
@@ -64,6 +65,9 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
               <span className="font-bold tabular-nums text-slate-200">{bestWpm} WPM</span>
             </div>
           </div>
+
+          {/* In-app PWA install button */}
+          <PWAInstallButton />
 
           <button
             onClick={toggleMute}

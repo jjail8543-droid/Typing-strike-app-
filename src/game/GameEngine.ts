@@ -84,7 +84,12 @@ export class GameEngine {
   // Animation frame
   private lastTime: number = 0;
   private animationFrameId: number | null = null;
-  private onStatsUpdate?: (stats: GameStats, status: GameStatus, lockedEnemy: Enemy | null) => void;
+  private onStatsUpdate?: (
+    stats: GameStats,
+    status: GameStatus,
+    lockedEnemy: Enemy | null,
+    activeEnemies: Enemy[]
+  ) => void;
 
   constructor(canvas: HTMLCanvasElement, settings: GameSettings) {
     this.canvas = canvas;
@@ -97,7 +102,14 @@ export class GameEngine {
     this.initStars();
   }
 
-  public setOnStatsUpdate(callback: (stats: GameStats, status: GameStatus, lockedEnemy: Enemy | null) => void) {
+  public setOnStatsUpdate(
+    callback: (
+      stats: GameStats,
+      status: GameStatus,
+      lockedEnemy: Enemy | null,
+      activeEnemies: Enemy[]
+    ) => void
+  ) {
     this.onStatsUpdate = callback;
   }
 
@@ -657,6 +669,7 @@ export class GameEngine {
 
     this.enemies.push(newEnemy);
     this.enemiesSpawnedInWave++;
+    this.notifyStats();
   }
 
   private createImpactSparks(x: number, y: number, color: string, count: number) {
@@ -1200,7 +1213,7 @@ export class GameEngine {
   private notifyStats() {
     if (this.onStatsUpdate) {
       const lockedEnemy = this.enemies.find(e => e.id === this.lockedEnemyId) || null;
-      this.onStatsUpdate({ ...this.stats }, this.status, lockedEnemy);
+      this.onStatsUpdate({ ...this.stats }, this.status, lockedEnemy, [...this.enemies]);
     }
   }
 
